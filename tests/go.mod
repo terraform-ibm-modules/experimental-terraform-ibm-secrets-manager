@@ -1,4 +1,4 @@
-module github.com/terraform-ibm-modules/terraform-ibm-secrets-manager
+module github.com/terraform-ibm-modules/experimental-terraform-ibm-secrets-manager
 
 go 1.22
 
