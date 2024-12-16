@@ -15,14 +15,14 @@ repository:
   # By changing this field, you rename the repository.
 
   # Uncomment this name property and set the name to the current repo name.
-  name: "terraform-ibm-secrets-manager"
+  name: "experimental-terraform-ibm-secrets-manager"
 
   # The description is displayed under the repository name on the
   # organization page and in the 'About' section of the repository.
 
   # Uncomment this description property
   # and update the description to the current repo description.
-  description: "This module creates a Secrets Manager instance"
+  description: "Experimental version of Secrets Manager instance module"
 
   # Use a comma-separated list of topics to set on the repo (ensure not to use any caps in the topic string).
-  topics: core-team, terraform, ibm-cloud, terraform-module, secrets-manager, supported, graduated, deployable-architecture
+  topics: terraform, terraform-module, secrets-manager, deployable-architecture
