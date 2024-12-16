@@ -1,0 +1,387 @@
+{
+  "products": [
+    {
+      "name": "testing-deploy-arch-ibm-secrets-manager",
+      "label": "[Add-ons Beta] Cloud automation for Secrets Manager",
+      "product_kind": "solution",
+      "tags": [
+        "ibm_created",
+        "target_terraform",
+        "terraform",
+        "solution",
+        "security"
+      ],
+      "keywords": [
+        "Secrets",
+        "Secrets Manager",
+        "IaC",
+        "infrastructure as code",
+        "terraform",
+        "solution"
+      ],
+      "short_description": "Creates and configures a Secrets Manager instance.",
+      "long_description": "Looking for the released version? Go [here](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-secrets-manager-6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944-global). Stay here if you want to try an experimental version with upcoming features. \n\nThis solution is used to provision and configure an IBM Cloud Secrets Manager instance.",
+      "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-secrets-manager/blob/main/solutions/standard/README.md",
+      "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-secrets-manager/main/images/secrets_manager.svg",
+      "provider_name": "IBM",
+      "features": [
+        {
+          "title": "Creates a Secrets Manager instance.",
+          "description": "Creates an IBM Secrets Manager instance."
+        },
+        {
+          "title": "Optionally configure an IBM Secrets Manager IAM credentials engine to an IBM Secrets Manager instance.",
+          "description": "Optionally configure an IBM Secrets Manager IAM credentials engine to an IBM Secrets Manager instance."
+        },
+        {
+          "title": "Sets up authorization policy.",
+          "description": "Sets up IBM IAM authorization policy between IBM Secrets Manager instance and IBM Key Management Service (KMS) instance. It also supports Event Notification authorization policy."
+        },
+        {
+          "title": "Configures lifecycle notifications for the Secrets Manager instance.",
+          "description": "Configures lifecycle notifications for the IBM Secrets Manager instance by connecting an IBM Event Notifications service. The DA supports optionally creating a KMS key ring and key, or using an already existing one to encrypt data."
+        }
+      ],
+      "support_details": "This product is in the community registry, as such support is handled through the originated repo. If you experience issues please open an issue in that repository [https://github.com/terraform-ibm-modules/terraform-ibm-secrets-manager/issues](https://github.com/terraform-ibm-modules/terraform-ibm-secrets-manager/issues). Please note this product is not supported via the IBM Cloud Support Center.",
+      "flavors": [
+        {
+          "label": "Standard",
+          "name": "standard",
+          "install_type": "extension",
+          "working_directory": "solutions/standard",
+          "compliance": {
+            "authority": "scc-v3",
+            "profiles": [
+              {
+                "profile_name": "IBM Cloud Framework for Financial Services",
+                "profile_version": "1.7.0"
+              }
+            ]
+          },
+          "configuration": [
+            {
+              "key": "ibmcloud_api_key",
+              "required": true
+            },
+            {
+              "key": "region",
+              "required": true,
+              "custom_config": {
+                "type": "region",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "generationType": "2"
+                }
+              }
+            },
+            {
+              "key": "prefix",
+              "required": true
+            },
+            {
+              "key": "use_existing_resource_group",
+              "required": false
+            },
+            {
+              "key": "resource_group_name",
+              "required": false
+            },
+            {
+              "key": "secrets_manager_instance_name",
+              "required": false
+            },
+            {
+              "key": "service_plan",
+              "required": false,
+              "options": [
+                {
+                  "displayname": "Standard",
+                  "value": "standard"
+                },
+                {
+                  "displayname": "Trial",
+                  "value": "trial"
+                }
+              ]
+            },
+            {
+              "key": "allowed_network",
+              "required": false,
+              "options": [
+                {
+                  "displayname": "Public and private",
+                  "value": "public-and-private"
+                },
+                {
+                  "displayname": "Private only",
+                  "value": "private-only"
+                }
+              ]
+            },
+            {
+              "key": "secret_manager_tags",
+              "required": false
+            },
+            {
+              "key": "iam_engine_enabled",
+              "required": false
+            },
+            {
+              "key": "iam_engine_name",
+              "required": false
+            },
+            {
+              "key": "public_engine_enabled",
+              "required": false
+            },
+            {
+              "key": "public_engine_name",
+              "required": false
+            },
+            {
+              "key": "cis_id",
+              "required": false
+            },
+            {
+              "key": "dns_provider_name",
+              "required": false
+            },
+            {
+              "key": "ca_name",
+              "required": false
+            },
+            {
+              "key": "acme_letsencrypt_private_key",
+              "required": false
+            },
+            {
+              "key": "private_engine_enabled",
+              "required": false
+            },
+            {
+              "key": "private_engine_name",
+              "required": false
+            },
+            {
+              "key": "root_ca_name",
+              "required": false
+            },
+            {
+              "key": "root_ca_common_name",
+              "required": false
+            },
+            {
+              "key": "root_ca_max_ttl",
+              "required": false
+            },
+            {
+              "key": "intermediate_ca_name",
+              "required": false
+            },
+            {
+              "key": "certificate_template_name",
+              "required": false
+            },
+            {
+              "key": "skip_kms_iam_authorization_policy",
+              "required": false
+            },
+            {
+              "key": "existing_secrets_manager_kms_key_crn",
+              "required": false
+            },
+            {
+              "key": "existing_kms_instance_crn",
+              "required": false
+            },
+            {
+              "key": "kms_endpoint_type",
+              "required": false,
+              "options": [
+                {
+                  "displayname": "Public",
+                  "value": "public"
+                },
+                {
+                  "displayname": "Private",
+                  "value": "private"
+                }
+              ]
+            },
+            {
+              "key": "kms_key_ring_name",
+              "required": false
+            },
+            {
+              "key": "kms_key_name",
+              "required": false
+            },
+            {
+              "key": "existing_event_notification_instance_crn",
+              "required": false
+            },
+            {
+              "key": "skip_event_notification_iam_authorization_policy",
+              "required": false
+            },
+            {
+              "key": "enable_event_notification",
+              "required": false
+            },
+            {
+              "key": "existing_secrets_endpoint_type",
+              "required": false
+            },
+            {
+              "key": "existing_secrets_manager_crn",
+              "required": false
+            },
+            {
+              "key": "ibmcloud_kms_api_key",
+              "required": false
+            },
+            {
+              "key": "sm_en_email_list",
+              "required": false
+            },
+            {
+              "key": "sm_en_from_email",
+              "required": false
+            },
+            {
+              "key": "sm_en_reply_to_email",
+              "required": false
+            }
+          ],
+          "architecture": {
+            "descriptions": "This architecture supports creating and configuring a Secrets Manager instance.",
+            "features": [
+              {
+                "title": "Creates a Secrets Manager instance.",
+                "description": "Creates and configures an IBM Secrets Manager instance."
+              },
+              {
+                "title": "Optionally configure an IBM Secrets Manager IAM credentials engine to an IBM Secrets Manager instance.",
+                "description": "Optionally configure an IBM Secrets Manager IAM credentials engine to an IBM Secrets Manager instance."
+              },
+              {
+                "title": "Sets up authorization policy.",
+                "description": "Sets up IBM IAM authorization policy between IBM Secrets Manager instance and IBM Key Management Service (KMS) instance. It also supports Event Notification authorization policy."
+              },
+              {
+                "title": "Configures lifecycle notifications for the Secrets Manager instance.",
+                "description": "Configures lifecycle notifications for the IBM Secrets Manager instance by connecting an IBM Event Notifications service. The DA supports optionally creating a KMS key ring and key, or using an already existing one to encrypt data."
+              }
+            ],
+            "diagrams": [
+              {
+                "diagram": {
+                  "caption": "Secrets Manager",
+                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-secrets-manager/main/reference-architecture/secrets_manager.svg",
+                  "type": "image/svg+xml"
+                },
+                "description": "This architecture supports creating and configuring IBM Secrets Manager instance."
+              }
+            ]
+          },
+          "dependencies": [
+            {
+              "name": "testing-deploy-arch-ibm-kms",
+              "id": "85fdbd7a-8c77-4abd-b716-653a31f3aba9",
+              "version": "^1.0.1",
+              "flavors": [
+                "standard"
+              ],
+              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "optional": true,
+              "on_by_default": true,
+              "input_mapping": [
+                {
+                  "dependency_output": "kms_instance_crn",
+                  "version_input": "existing_kms_instance_crn"
+                }
+              ]
+            },
+            {
+              "name": "deploy-arch-ibm-account-infra-base",
+              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
+              "flavors": [
+                "standard"
+              ],
+              "id": "63641cec-6093-4b4f-b7b0-98d2f4185cd6-global",
+              "input_mapping": [
+                {
+                  "dependency_output": "security_resource_group_name",
+                  "version_input": "resource_group_name"
+                },
+                {
+                  "version_input": "use_existing_resource_group",
+                  "value": true
+                }
+              ],
+              "optional": true,
+              "on_by_default": true,
+              "version": "^1.11.6"
+            },
+            {
+              "name": "testing-deploy-arch-ibm-event-notifications",
+              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "flavors": [
+                "standard"
+              ],
+              "id": "1f6f1af5-185e-4ae7-9b42-4c64e42728f6",
+              "input_mapping": [
+                {
+                  "dependency_output": "crn",
+                  "version_input": "existing_event_notification_instance_crn"
+                }
+              ],
+              "optional": true,
+              "on_by_default": true,
+              "ignore_auto_referencing": [
+                "ibmcloud_kms_api_key", "service_plan"
+              ],
+              "version": "^1.0.1"
+            },
+            {
+              "name": "testing-deploy-arch-ibm-scc",
+              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "flavors": [
+                "instances"
+              ],
+              "id": "b773b1d4-69bb-48db-a657-2307015eb9c1",
+              "input_mapping": [
+                {
+                  "dependency_input": "crn",
+                  "version_input": "existing_event_notification_instance_crn"
+                },
+                {
+                  "dependency_input": "scc_region",
+                  "version_input": "region",
+                  "reference_version": true
+                }
+              ],
+              "optional": true,
+              "on_by_default": true,
+              "version": "^1.0.1"
+            },
+            {
+              "name": "testing-deploy-arch-ibm-observability",
+              "flavors": [
+                "instances"
+              ],
+              "id": "daf2cf91-2384-4205-b7f4-621299a4896d",
+              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "input_mapping": [],
+              "optional": true,
+              "on_by_default": true,
+              "version": "^1.0.7"
+            }
+          ],
+          "dependency_version_2": true
+        }
+      ]
+    }
+  ]
+}
