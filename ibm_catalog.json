@@ -288,12 +288,12 @@
           "dependencies": [
             {
               "name": "testing-deploy-arch-ibm-kms",
-              "id": "85fdbd7a-8c77-4abd-b716-653a31f3aba9",
+              "id": "85fdbd7a-8c77-4abd-b716-653a31f3aba9-global",
               "version": "^1.0.1",
               "flavors": [
                 "standard"
               ],
-              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "optional": true,
               "on_by_default": true,
               "input_mapping": [
@@ -326,11 +326,11 @@
             },
             {
               "name": "testing-deploy-arch-ibm-event-notifications",
-              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "flavors": [
                 "standard"
               ],
-              "id": "1f6f1af5-185e-4ae7-9b42-4c64e42728f6",
+              "id": "1f6f1af5-185e-4ae7-9b42-4c64e42728f6-global",
               "input_mapping": [
                 {
                   "dependency_output": "crn",
