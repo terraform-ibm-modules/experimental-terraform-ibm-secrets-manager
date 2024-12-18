@@ -371,8 +371,8 @@
               "flavors": [
                 "instances"
               ],
-              "id": "daf2cf91-2384-4205-b7f4-621299a4896d",
-              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "id": "daf2cf91-2384-4205-b7f4-621299a4896d-global",
+              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "input_mapping": [],
               "optional": true,
               "on_by_default": true,
