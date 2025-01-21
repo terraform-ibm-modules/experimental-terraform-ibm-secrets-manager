@@ -353,7 +353,7 @@
               "id": "b773b1d4-69bb-48db-a657-2307015eb9c1-global",
               "input_mapping": [
                 {
-                  "dependency_input": "crn",
+                  "dependency_input": "existing_en_crn",
                   "version_input": "existing_event_notification_instance_crn"
                 },
                 {
