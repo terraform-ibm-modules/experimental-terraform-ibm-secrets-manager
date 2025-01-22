@@ -370,7 +370,7 @@
             {
               "name": "testing-deploy-arch-ibm-observability",
               "flavors": [
-                "instances"
+                "standard"
               ],
               "id": "daf2cf91-2384-4205-b7f4-621299a4896d-global",
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
