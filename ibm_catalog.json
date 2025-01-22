@@ -289,7 +289,7 @@
             {
               "name": "testing-deploy-arch-ibm-kms",
               "id": "85fdbd7a-8c77-4abd-b716-653a31f3aba9-global",
-              "version": "^1.0.1",
+              "version": ">=1.0.6",
               "flavors": [
                 "standard"
               ],
@@ -322,7 +322,7 @@
               ],
               "optional": true,
               "on_by_default": true,
-              "version": "^1.11.6"
+              "version": ">=v1.18.0"
             },
             {
               "name": "testing-deploy-arch-ibm-event-notifications",
@@ -340,9 +340,10 @@
               "optional": true,
               "on_by_default": true,
               "ignore_auto_referencing": [
-                "ibmcloud_kms_api_key", "service_plan"
+                "ibmcloud_kms_api_key",
+                "service_plan"
               ],
-              "version": "^1.0.1"
+              "version": ">=1.0.8"
             },
             {
               "name": "testing-deploy-arch-ibm-scc",
@@ -364,7 +365,7 @@
               ],
               "optional": true,
               "on_by_default": true,
-              "version": "^1.0.1"
+              "version": ">=1.0.8"
             },
             {
               "name": "testing-deploy-arch-ibm-observability",
@@ -376,7 +377,7 @@
               "input_mapping": [],
               "optional": true,
               "on_by_default": true,
-              "version": "^1.0.7"
+              "version": ">=1.2.2"
             }
           ],
           "dependency_version_2": true
