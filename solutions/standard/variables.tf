@@ -28,8 +28,8 @@ variable "region" {
 
 variable "prefix" {
   type        = string
-  description = "The prefix to apply to all resources created by this solution."
-  default     = ""
+  description = "The prefix to add to all resources created by this solution. To not use any prefix value, you can set this value to `null` or an empty string."
+  default     = "dev"
 }
 
 ########################################################################################################################
