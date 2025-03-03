@@ -77,7 +77,8 @@
             },
             {
               "key": "prefix",
-              "required": true
+              "required": true,
+              "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
             },
             {
               "key": "use_existing_resource_group",
@@ -354,7 +355,7 @@
               "id": "b773b1d4-69bb-48db-a657-2307015eb9c1-global",
               "input_mapping": [
                 {
-                  "dependency_input": "crn",
+                  "dependency_input": "existing_en_crn",
                   "version_input": "existing_event_notification_instance_crn"
                 },
                 {
@@ -370,7 +371,7 @@
             {
               "name": "testing-deploy-arch-ibm-observability",
               "flavors": [
-                "instances"
+                "standard"
               ],
               "id": "daf2cf91-2384-4205-b7f4-621299a4896d-global",
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
