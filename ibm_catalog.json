@@ -417,7 +417,8 @@
               "input_mapping": [
                 {
                   "dependency_input": "existing_en_crn",
-                  "version_input": "existing_event_notifications_instance_crn"
+                  "version_input": "existing_event_notifications_instance_crn",
+                  "reference_version": true
                 },
                 {
                   "dependency_input": "scc_region",
