@@ -177,29 +177,11 @@
               ]
             },
             {
-              "key": "allowed_network",
-              "required": false,
-              "options": [
-                {
-                  "displayname": "Public and private",
-                  "value": "public-and-private"
-                },
-                {
-                  "displayname": "Private only",
-                  "value": "private-only"
-                }
-              ]
-            },
-            {
               "key": "iam_engine_enabled",
               "required": false
             },
             {
               "key": "iam_engine_name",
-              "required": false
-            },
-            {
-              "key": "public_engine_name",
               "required": false
             },
             {
@@ -220,10 +202,6 @@
             },
             {
               "key": "acme_letsencrypt_private_key",
-              "required": false
-            },
-            {
-              "key": "private_engine_name",
               "required": false
             },
             {
@@ -278,14 +256,6 @@
             },
             {
               "key": "kms_key_name",
-              "required": false
-            },
-            {
-              "key": "existing_secrets_endpoint_type",
-              "required": false
-            },
-            {
-              "key": "existing_secrets_manager_crn",
               "required": false
             },
             {
@@ -367,6 +337,16 @@
                 {
                   "dependency_output": "kms_instance_crn",
                   "version_input": "existing_kms_instance_crn"
+                },
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
+                },
+                {
+                  "dependency_input": "region",
+                  "version_input": "region",
+                  "reference_version": true
                 }
               ]
             },
@@ -385,6 +365,11 @@
                 {
                   "version_input": "use_existing_resource_group",
                   "value": true
+                },
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
                 }
               ],
               "optional": true,
@@ -402,6 +387,16 @@
                 {
                   "dependency_output": "crn",
                   "version_input": "existing_event_notifications_instance_crn"
+                },
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
+                },
+                {
+                  "dependency_input": "region",
+                  "version_input": "region",
+                  "reference_version": true
                 }
               ],
               "optional": true,
@@ -428,6 +423,11 @@
                   "dependency_input": "scc_region",
                   "version_input": "region",
                   "reference_version": true
+                },
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
                 }
               ],
               "optional": true,
@@ -441,7 +441,18 @@
               ],
               "id": "daf2cf91-2384-4205-b7f4-621299a4896d-global",
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
-              "input_mapping": [],
+              "input_mapping": [
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
+                },
+                {
+                  "dependency_input": "region",
+                  "version_input": "region",
+                  "reference_version": true
+                }
+              ],
               "optional": true,
               "on_by_default": true,
               "version": ">=1.2.2"
