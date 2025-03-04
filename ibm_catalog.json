@@ -66,14 +66,48 @@
             {
               "key": "region",
               "required": true,
-              "custom_config": {
-                "type": "region",
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "generationType": "2"
+              "options": [
+                {
+                  "displayname": "Osaka (jp-osa)",
+                  "value": "jp-osa"
+                },
+                {
+                  "displayname": "Sydney (au-syd)",
+                  "value": "au-syd"
+                },
+                {
+                  "displayname": "Tokyo (jp-tok)",
+                  "value": "jp-tok"
+                },
+                {
+                  "displayname": "Frankfurt (eu-de)",
+                  "value": "eu-de"
+                },
+                {
+                  "displayname": "London (eu-gb)",
+                  "value": "eu-gb"
+                },
+                {
+                  "displayname": "Madrid (eu-es)",
+                  "value": "eu-es"
+                },
+                {
+                  "displayname": "Dallas (us-south)",
+                  "value": "us-south"
+                },
+                {
+                  "displayname": "Toronto (ca-tor)",
+                  "value": "ca-tor"
+                },
+                {
+                  "displayname": "Washington DC (us-east)",
+                  "value": "us-east"
+                },
+                {
+                  "displayname": "Sao Paulo (br-sao)",
+                  "value": "br-sao"
                 }
-              }
+              ]
             },
             {
               "key": "prefix",
@@ -86,10 +120,46 @@
             },
             {
               "key": "resource_group_name",
+              "required": true
+            },
+            {
+              "key": "existing_kms_instance_crn",
               "required": false
             },
             {
+              "key": "provider_visibility",
+              "options": [
+                {
+                  "displayname": "private",
+                  "value": "private"
+                },
+                {
+                  "displayname": "public",
+                  "value": "public"
+                },
+                {
+                  "displayname": "public-and-private",
+                  "value": "public-and-private"
+                }
+              ]
+            },
+            {
               "key": "secrets_manager_instance_name",
+              "required": false
+            },
+            {
+              "key": "existing_secrets_manager_crn",
+              "required": false
+            },
+            {
+              "key": "secrets_manager_tags",
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              },
               "required": false
             },
             {
@@ -121,10 +191,6 @@
               ]
             },
             {
-              "key": "secret_manager_tags",
-              "required": false
-            },
-            {
               "key": "iam_engine_enabled",
               "required": false
             },
@@ -133,23 +199,23 @@
               "required": false
             },
             {
-              "key": "public_engine_enabled",
-              "required": false
-            },
-            {
               "key": "public_engine_name",
               "required": false
             },
             {
-              "key": "cis_id",
+              "key": "public_cert_engine_enabled",
               "required": false
             },
             {
-              "key": "dns_provider_name",
+              "key": "public_cert_engine_internet_services_crn",
               "required": false
             },
             {
-              "key": "ca_name",
+              "key": "public_cert_engine_dns_provider_config_name",
+              "required": false
+            },
+            {
+              "key": "public_cert_engine_lets_encrypt_config_ca_name",
               "required": false
             },
             {
@@ -157,31 +223,7 @@
               "required": false
             },
             {
-              "key": "private_engine_enabled",
-              "required": false
-            },
-            {
               "key": "private_engine_name",
-              "required": false
-            },
-            {
-              "key": "root_ca_name",
-              "required": false
-            },
-            {
-              "key": "root_ca_common_name",
-              "required": false
-            },
-            {
-              "key": "root_ca_max_ttl",
-              "required": false
-            },
-            {
-              "key": "intermediate_ca_name",
-              "required": false
-            },
-            {
-              "key": "certificate_template_name",
               "required": false
             },
             {
@@ -189,11 +231,31 @@
               "required": false
             },
             {
-              "key": "existing_secrets_manager_kms_key_crn",
+              "key": "private_cert_engine_enabled",
               "required": false
             },
             {
-              "key": "existing_kms_instance_crn",
+              "key": "private_cert_engine_config_root_ca_name",
+              "required": false
+            },
+            {
+              "key": "private_cert_engine_config_root_ca_common_name",
+              "required": false
+            },
+            {
+              "key": "private_cert_engine_config_root_ca_max_ttl",
+              "required": false
+            },
+            {
+              "key": "private_cert_engine_config_intermediate_ca_name",
+              "required": false
+            },
+            {
+              "key": "private_cert_engine_config_template_name",
+              "required": false
+            },
+            {
+              "key": "existing_secrets_manager_kms_key_crn",
               "required": false
             },
             {
@@ -219,18 +281,6 @@
               "required": false
             },
             {
-              "key": "existing_event_notification_instance_crn",
-              "required": false
-            },
-            {
-              "key": "skip_event_notification_iam_authorization_policy",
-              "required": false
-            },
-            {
-              "key": "enable_event_notification",
-              "required": false
-            },
-            {
               "key": "existing_secrets_endpoint_type",
               "required": false
             },
@@ -243,15 +293,31 @@
               "required": false
             },
             {
-              "key": "sm_en_email_list",
+              "key": "enable_event_notifications",
               "required": false
             },
             {
-              "key": "sm_en_from_email",
+              "key": "event_notifications_email_list",
               "required": false
             },
             {
-              "key": "sm_en_reply_to_email",
+              "key": "event_notifications_from_email",
+              "required": false
+            },
+            {
+              "key": "event_notifications_reply_to_email",
+              "required": false
+            },
+            {
+              "key": "existing_event_notifications_instance_crn",
+              "required": false
+            },
+            {
+              "key": "skip_event_notifications_iam_authorization_policy",
+              "required": false
+            },
+            {
+              "key":"cbr_rules",
               "required": false
             }
           ],
@@ -335,7 +401,7 @@
               "input_mapping": [
                 {
                   "dependency_output": "crn",
-                  "version_input": "existing_event_notification_instance_crn"
+                  "version_input": "existing_event_notifications_instance_crn"
                 }
               ],
               "optional": true,
@@ -356,7 +422,7 @@
               "input_mapping": [
                 {
                   "dependency_input": "existing_en_crn",
-                  "version_input": "existing_event_notification_instance_crn"
+                  "version_input": "existing_event_notifications_instance_crn"
                 },
                 {
                   "dependency_input": "scc_region",
