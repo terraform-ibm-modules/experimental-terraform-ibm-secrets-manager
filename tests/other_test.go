@@ -16,8 +16,14 @@ func TestRunBasicExample(t *testing.T) {
 		Testing:      t,
 		TerraformDir: "examples/basic",
 		Prefix:       "secrets-mgr-def",
+		Region:       validRegions[rand.Intn(len(validRegions))],
 	})
 
+	terraformVars := map[string]interface{}{
+		"prefix": options.Prefix,
+	}
+
+	options.TerraformVars = terraformVars
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
 	assert.NotNil(t, output, "Expected some output")
@@ -26,7 +32,7 @@ func TestRunBasicExample(t *testing.T) {
 func TestRunCompleteExample(t *testing.T) {
 	t.Parallel()
 
-	options := setupOptions(t, "secrets-mgr")
+	options := setupOptions(t, "secrets-mgr", false)
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
@@ -43,6 +49,7 @@ func TestFSCloudInSchematics(t *testing.T) {
 			"*.tf",
 			fscloudExampleTerraformDir + "/*.tf",
 			"modules/fscloud/*.tf",
+			"modules/secrets/*.tf",
 		},
 		// ResourceGroup:          resourceGroup,
 		TemplateFolder:         fscloudExampleTerraformDir,
@@ -55,8 +62,8 @@ func TestFSCloudInSchematics(t *testing.T) {
 		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
 		{Name: "region", Value: validRegions[rand.Intn(len(validRegions))], DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},
-		{Name: "existing_kms_instance_guid", Value: permanentResources["hpcs_east"], DataType: "string"},
-		{Name: "kms_key_crn", Value: permanentResources["hpcs_east_root_key_crn"], DataType: "string"},
+		{Name: "existing_kms_instance_guid", Value: permanentResources["hpcs_south"], DataType: "string"},
+		{Name: "kms_key_crn", Value: permanentResources["hpcs_south_root_key_crn"], DataType: "string"},
 		{Name: "sm_service_plan", Value: "trial", DataType: "string"},
 	}
 
