@@ -20,7 +20,7 @@
         "solution"
       ],
       "short_description": "Creates and configures a Secrets Manager instance.",
-      "long_description": "Looking for the released version? Go [here](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-secrets-manager-6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944-global). Stay here if you want to try an experimental version with upcoming features. \n\nThis solution is used to provision and configure an IBM Cloud Secrets Manager instance.",
+      "long_description": "Looking for the released version? Go [here](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-secrets-manager-6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944-global). Stay here if you want to try an experimental version with the [Optional and swappable components](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-choose-plan-process#optional-swappable) capability. \n\nThis solution is used to provision and configure an IBM Cloud Secrets Manager instance.",
       "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-secrets-manager/blob/main/solutions/standard/README.md",
       "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-secrets-manager/main/images/secrets_manager.svg",
       "provider_name": "IBM",
@@ -47,7 +47,7 @@
         {
           "label": "Standard",
           "name": "standard",
-          "install_type": "extension",
+          "install_type": "fullstack",
           "working_directory": "solutions/standard",
           "compliance": {
             "authority": "scc-v3",
@@ -112,7 +112,7 @@
             {
               "key": "prefix",
               "required": true,
-              "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
+              "description": "The prefix to add to all resources that this solution creates (e.g `prod`, `test`, `dev`). To not use any prefix value, you can enter the string `__NULL__`."
             },
             {
               "key": "use_existing_resource_group",
@@ -348,6 +348,9 @@
                   "version_input": "region",
                   "reference_version": true
                 }
+              ],
+              "ignore_auto_referencing": [
+                "*"
               ]
             },
             {
@@ -371,6 +374,9 @@
                   "version_input": "prefix",
                   "reference_version": true
                 }
+              ],
+              "ignore_auto_referencing": [
+                "*"
               ],
               "optional": true,
               "on_by_default": true,
@@ -402,8 +408,7 @@
               "optional": true,
               "on_by_default": true,
               "ignore_auto_referencing": [
-                "ibmcloud_kms_api_key",
-                "service_plan"
+                "*"
               ],
               "version": ">=1.0.8"
             },
@@ -431,6 +436,9 @@
                   "reference_version": true
                 }
               ],
+              "ignore_auto_referencing": [
+                "*"
+              ],
               "optional": true,
               "on_by_default": true,
               "version": ">=1.0.8"
@@ -453,6 +461,9 @@
                   "version_input": "region",
                   "reference_version": true
                 }
+              ],
+              "ignore_auto_referencing": [
+                "*"
               ],
               "optional": true,
               "on_by_default": true,

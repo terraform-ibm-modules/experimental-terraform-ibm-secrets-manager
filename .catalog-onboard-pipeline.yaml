@@ -1,10 +1,10 @@
 ---
 apiVersion: v1
 offerings:
-  - name: deploy-arch-ibm-secrets-manager
+  - name: testing-deploy-arch-ibm-secrets-manager
     kind: solution
-    catalog_id: 7df1e4ca-d54c-4fd0-82ce-3d13247308cd
-    offering_id: 6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944
+    catalog_id: f64499c8-eb50-4985-bf91-29f9e605a433
+    offering_id: 5f149ae6-d781-460a-977d-c8c4171ad0fa
     variations:
       - name: standard
         mark_ready: true

@@ -193,6 +193,7 @@ func TestRunExistingResourcesInstances(t *testing.T) {
 		// ------------------------------------------------------------------------------------
 		options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
 			Testing: t,
+			Prefix:  "sm-ins-ext",
 			TarIncludePatterns: []string{
 				"*.tf",
 				fmt.Sprintf("%s/*.tf", solutionsTerraformDir),
@@ -208,6 +209,7 @@ func TestRunExistingResourcesInstances(t *testing.T) {
 
 		options.TerraformVars = []testschematic.TestSchematicTerraformVar{
 			{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
+			{Name: "prefix", Value: options.Prefix, DataType: "string"},
 			{Name: "region", Value: region, DataType: "string"},
 			{Name: "resource_group_name", Value: terraform.Output(t, existingTerraformOptions, "resource_group_name"), DataType: "string"},
 			{Name: "use_existing_resource_group", Value: true, DataType: "bool"},

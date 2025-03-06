@@ -19,6 +19,11 @@ func TestRunBasicExample(t *testing.T) {
 		Region:       validRegions[rand.Intn(len(validRegions))],
 	})
 
+	terraformVars := map[string]interface{}{
+		"prefix": options.Prefix,
+	}
+
+	options.TerraformVars = terraformVars
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
 	assert.NotNil(t, output, "Expected some output")
