@@ -124,7 +124,7 @@
             },
             {
               "key": "existing_kms_instance_crn",
-              "required": false
+              "required": true
             },
             {
               "key": "provider_visibility",
