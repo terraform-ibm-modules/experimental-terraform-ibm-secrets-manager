@@ -20,7 +20,7 @@
         "solution"
       ],
       "short_description": "Creates and configures a Secrets Manager instance.",
-      "long_description": "Looking for the released version? Go [here](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-secrets-manager-6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944-global). Stay here if you want to try an experimental version with upcoming features. \n\nThis solution is used to provision and configure an IBM Cloud Secrets Manager instance.",
+      "long_description": "Looking for the released version? Go [here](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-secrets-manager-6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944-global). Stay here if you want to try an experimental version with the [Optional and swappable components](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-choose-plan-process#optional-swappable) capability. \n\nThis solution is used to provision and configure an IBM Cloud Secrets Manager instance.",
       "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-secrets-manager/blob/main/solutions/standard/README.md",
       "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-secrets-manager/main/images/secrets_manager.svg",
       "provider_name": "IBM",
@@ -47,7 +47,7 @@
         {
           "label": "Standard",
           "name": "standard",
-          "install_type": "extension",
+          "install_type": "fullstack",
           "working_directory": "solutions/standard",
           "compliance": {
             "authority": "scc-v3",
@@ -66,19 +66,53 @@
             {
               "key": "region",
               "required": true,
-              "custom_config": {
-                "type": "region",
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "generationType": "2"
+              "options": [
+                {
+                  "displayname": "Osaka (jp-osa)",
+                  "value": "jp-osa"
+                },
+                {
+                  "displayname": "Sydney (au-syd)",
+                  "value": "au-syd"
+                },
+                {
+                  "displayname": "Tokyo (jp-tok)",
+                  "value": "jp-tok"
+                },
+                {
+                  "displayname": "Frankfurt (eu-de)",
+                  "value": "eu-de"
+                },
+                {
+                  "displayname": "London (eu-gb)",
+                  "value": "eu-gb"
+                },
+                {
+                  "displayname": "Madrid (eu-es)",
+                  "value": "eu-es"
+                },
+                {
+                  "displayname": "Dallas (us-south)",
+                  "value": "us-south"
+                },
+                {
+                  "displayname": "Toronto (ca-tor)",
+                  "value": "ca-tor"
+                },
+                {
+                  "displayname": "Washington DC (us-east)",
+                  "value": "us-east"
+                },
+                {
+                  "displayname": "Sao Paulo (br-sao)",
+                  "value": "br-sao"
                 }
-              }
+              ]
             },
             {
               "key": "prefix",
               "required": true,
-              "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
+              "description": "The prefix to add to all resources that this solution creates (e.g `prod`, `test`, `dev`). To not use any prefix value, you can enter the string `__NULL__`."
             },
             {
               "key": "use_existing_resource_group",
@@ -86,10 +120,46 @@
             },
             {
               "key": "resource_group_name",
+              "required": true
+            },
+            {
+              "key": "existing_kms_instance_crn",
               "required": false
             },
             {
+              "key": "provider_visibility",
+              "options": [
+                {
+                  "displayname": "private",
+                  "value": "private"
+                },
+                {
+                  "displayname": "public",
+                  "value": "public"
+                },
+                {
+                  "displayname": "public-and-private",
+                  "value": "public-and-private"
+                }
+              ]
+            },
+            {
               "key": "secrets_manager_instance_name",
+              "required": false
+            },
+            {
+              "key": "existing_secrets_manager_crn",
+              "required": false
+            },
+            {
+              "key": "secrets_manager_tags",
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              },
               "required": false
             },
             {
@@ -107,24 +177,6 @@
               ]
             },
             {
-              "key": "allowed_network",
-              "required": false,
-              "options": [
-                {
-                  "displayname": "Public and private",
-                  "value": "public-and-private"
-                },
-                {
-                  "displayname": "Private only",
-                  "value": "private-only"
-                }
-              ]
-            },
-            {
-              "key": "secret_manager_tags",
-              "required": false
-            },
-            {
               "key": "iam_engine_enabled",
               "required": false
             },
@@ -133,23 +185,19 @@
               "required": false
             },
             {
-              "key": "public_engine_enabled",
+              "key": "public_cert_engine_enabled",
               "required": false
             },
             {
-              "key": "public_engine_name",
+              "key": "public_cert_engine_internet_services_crn",
               "required": false
             },
             {
-              "key": "cis_id",
+              "key": "public_cert_engine_dns_provider_config_name",
               "required": false
             },
             {
-              "key": "dns_provider_name",
-              "required": false
-            },
-            {
-              "key": "ca_name",
+              "key": "public_cert_engine_lets_encrypt_config_ca_name",
               "required": false
             },
             {
@@ -157,43 +205,35 @@
               "required": false
             },
             {
-              "key": "private_engine_enabled",
-              "required": false
-            },
-            {
-              "key": "private_engine_name",
-              "required": false
-            },
-            {
-              "key": "root_ca_name",
-              "required": false
-            },
-            {
-              "key": "root_ca_common_name",
-              "required": false
-            },
-            {
-              "key": "root_ca_max_ttl",
-              "required": false
-            },
-            {
-              "key": "intermediate_ca_name",
-              "required": false
-            },
-            {
-              "key": "certificate_template_name",
-              "required": false
-            },
-            {
               "key": "skip_kms_iam_authorization_policy",
               "required": false
             },
             {
-              "key": "existing_secrets_manager_kms_key_crn",
+              "key": "private_cert_engine_enabled",
               "required": false
             },
             {
-              "key": "existing_kms_instance_crn",
+              "key": "private_cert_engine_config_root_ca_name",
+              "required": false
+            },
+            {
+              "key": "private_cert_engine_config_root_ca_common_name",
+              "required": false
+            },
+            {
+              "key": "private_cert_engine_config_root_ca_max_ttl",
+              "required": false
+            },
+            {
+              "key": "private_cert_engine_config_intermediate_ca_name",
+              "required": false
+            },
+            {
+              "key": "private_cert_engine_config_template_name",
+              "required": false
+            },
+            {
+              "key": "existing_secrets_manager_kms_key_crn",
               "required": false
             },
             {
@@ -219,39 +259,35 @@
               "required": false
             },
             {
-              "key": "existing_event_notification_instance_crn",
-              "required": false
-            },
-            {
-              "key": "skip_event_notification_iam_authorization_policy",
-              "required": false
-            },
-            {
-              "key": "enable_event_notification",
-              "required": false
-            },
-            {
-              "key": "existing_secrets_endpoint_type",
-              "required": false
-            },
-            {
-              "key": "existing_secrets_manager_crn",
-              "required": false
-            },
-            {
               "key": "ibmcloud_kms_api_key",
               "required": false
             },
             {
-              "key": "sm_en_email_list",
+              "key": "enable_event_notifications",
               "required": false
             },
             {
-              "key": "sm_en_from_email",
+              "key": "event_notifications_email_list",
               "required": false
             },
             {
-              "key": "sm_en_reply_to_email",
+              "key": "event_notifications_from_email",
+              "required": false
+            },
+            {
+              "key": "event_notifications_reply_to_email",
+              "required": false
+            },
+            {
+              "key": "existing_event_notifications_instance_crn",
+              "required": false
+            },
+            {
+              "key": "skip_event_notifications_iam_authorization_policy",
+              "required": false
+            },
+            {
+              "key": "cbr_rules",
               "required": false
             }
           ],
@@ -290,7 +326,7 @@
             {
               "name": "testing-deploy-arch-ibm-kms",
               "id": "85fdbd7a-8c77-4abd-b716-653a31f3aba9-global",
-              "version": ">=1.0.6",
+              "version": "^v1.2.1",
               "flavors": [
                 "standard"
               ],
@@ -301,7 +337,20 @@
                 {
                   "dependency_output": "kms_instance_crn",
                   "version_input": "existing_kms_instance_crn"
+                },
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
+                },
+                {
+                  "dependency_input": "region",
+                  "version_input": "region",
+                  "reference_version": true
                 }
+              ],
+              "ignore_auto_referencing": [
+                "*"
               ]
             },
             {
@@ -319,11 +368,19 @@
                 {
                   "version_input": "use_existing_resource_group",
                   "value": true
+                },
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
                 }
+              ],
+              "ignore_auto_referencing": [
+                "*"
               ],
               "optional": true,
               "on_by_default": true,
-              "version": ">=v1.18.0"
+              "version": "^v1.19.0"
             },
             {
               "name": "testing-deploy-arch-ibm-event-notifications",
@@ -335,16 +392,25 @@
               "input_mapping": [
                 {
                   "dependency_output": "crn",
-                  "version_input": "existing_event_notification_instance_crn"
+                  "version_input": "existing_event_notifications_instance_crn"
+                },
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
+                },
+                {
+                  "dependency_input": "region",
+                  "version_input": "region",
+                  "reference_version": true
                 }
               ],
               "optional": true,
               "on_by_default": true,
               "ignore_auto_referencing": [
-                "ibmcloud_kms_api_key",
-                "service_plan"
+                "*"
               ],
-              "version": ">=1.0.8"
+              "version": "^v1.1.0"
             },
             {
               "name": "testing-deploy-arch-ibm-scc",
@@ -356,17 +422,26 @@
               "input_mapping": [
                 {
                   "dependency_input": "existing_en_crn",
-                  "version_input": "existing_event_notification_instance_crn"
+                  "version_input": "existing_event_notifications_instance_crn",
+                  "reference_version": true
                 },
                 {
                   "dependency_input": "scc_region",
                   "version_input": "region",
                   "reference_version": true
+                },
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
                 }
+              ],
+              "ignore_auto_referencing": [
+                "*"
               ],
               "optional": true,
               "on_by_default": true,
-              "version": ">=1.0.8"
+              "version": "^v1.1.0"
             },
             {
               "name": "testing-deploy-arch-ibm-observability",
@@ -375,10 +450,24 @@
               ],
               "id": "daf2cf91-2384-4205-b7f4-621299a4896d-global",
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
-              "input_mapping": [],
+              "input_mapping": [
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
+                },
+                {
+                  "dependency_input": "region",
+                  "version_input": "region",
+                  "reference_version": true
+                }
+              ],
+              "ignore_auto_referencing": [
+                "*"
+              ],
               "optional": true,
               "on_by_default": true,
-              "version": ">=1.2.2"
+              "version": "^1.3.0"
             }
           ],
           "dependency_version_2": true
