@@ -123,7 +123,8 @@
             },
             {
               "key": "existing_kms_instance_crn",
-              "required": false
+              "required": true,
+              "description": "REQUIRED INPUT: Either `existing_kms_instance_crn` OR `existing_secrets_manager_crn`."
             },
             {
               "key": "provider_visibility",
@@ -148,7 +149,8 @@
             },
             {
               "key": "existing_secrets_manager_crn",
-              "required": false
+              "description": "REQUIRED INPUT: Either `existing_kms_instance_crn` OR `existing_secrets_manager_crn`.",
+              "required": true
             },
             {
               "key": "secrets_manager_tags",
