@@ -111,11 +111,12 @@
             },
             {
               "key": "prefix",
-              "required": true
+              "required": true,
+              "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
             },
             {
               "key": "use_existing_resource_group",
-              "required": false
+              "required": true
             },
             {
               "key": "resource_group_name",
@@ -123,7 +124,8 @@
             },
             {
               "key": "existing_kms_instance_crn",
-              "required": false
+              "required": true,
+              "description": "REQUIRED INPUT: Either `existing_kms_instance_crn` OR `existing_secrets_manager_crn`."
             },
             {
               "key": "provider_visibility",
@@ -148,7 +150,8 @@
             },
             {
               "key": "existing_secrets_manager_crn",
-              "required": false
+              "description": "REQUIRED INPUT: Either `existing_kms_instance_crn` OR `existing_secrets_manager_crn`.",
+              "required": true
             },
             {
               "key": "secrets_manager_tags",
@@ -174,6 +177,10 @@
                   "value": "trial"
                 }
               ]
+            },
+            {
+              "key": "skip_iam_authorization_policy",
+              "required": false
             },
             {
               "key": "iam_engine_enabled",
