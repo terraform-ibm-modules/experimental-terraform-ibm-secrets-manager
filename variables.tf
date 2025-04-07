@@ -27,6 +27,12 @@ variable "sm_service_plan" {
   }
 }
 
+variable "skip_iam_authorization_policy" {
+  type        = bool
+  description = "Whether to skip the creation of the IAM authorization policies required to enable the IAM credentials engine. If set to false, policies will be created that grants the Secrets Manager instance 'Operator' access to the IAM identity service, and 'Groups Service Member Manage' access to the IAM groups service."
+  default     = false
+}
+
 variable "sm_tags" {
   type        = list(string)
   description = "The list of resource tags that you want to associate with your Secrets Manager instance."
@@ -51,20 +57,20 @@ variable "kms_encryption_enabled" {
 
 variable "skip_kms_iam_authorization_policy" {
   type        = bool
-  description = "Set to true to skip the creation of an IAM authorization policy that permits all Secrets Manager instances in the resource group to read the encryption key from the KMS instance. If set to false, pass in a value for the KMS instance in the `existing_kms_instance_guid` variable. In addition, no policy is created if `kms_encryption_enabled` is set to false."
+  description = "Whether to skip the creation of the IAM authorization policies required to enable the IAM credentials engine. If set to false, policies will be created that grants the Secrets Manager instance 'Operator' access to the IAM identity service, and 'Groups Service Member Manage' access to the IAM groups service."
   default     = false
-}
-
-variable "existing_kms_instance_guid" {
-  type        = string
-  description = "The GUID of the Hyper Protect Crypto Services or Key Protect instance in which the key specified in `kms_key_crn` is coming from. Required only if `kms_encryption_enabled` is set to true, and `skip_kms_iam_authorization_policy` is set to false."
-  default     = null
 }
 
 variable "kms_key_crn" {
   type        = string
   description = "The root key CRN of a Key Management Service like Key Protect or Hyper Protect Crypto Services (HPCS) that you want to use for encryption. Only used if `kms_encryption_enabled` is set to true."
   default     = null
+}
+
+variable "is_hpcs_key" {
+  type        = bool
+  description = "Set it to true if the key provided through the `kms_key_crn` is Hyper Protect Crypto Services key."
+  default     = false
 }
 
 variable "existing_sm_instance_crn" {

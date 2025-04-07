@@ -36,9 +36,9 @@ var permanentResources map[string]interface{}
 // Current supported Event Notification regions
 var validRegions = []string{
 	// "us-south", # do not run secrets manager tests in us regions
-	"eu-de",
-	"eu-gb",
-	"au-syd",
+	"eu-de", // all tests using KMS should run in the same region https://github.ibm.com/GoldenEye/issues/issues/12725
+	// "eu-gb",
+	// "au-syd",
 }
 
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
@@ -193,7 +193,6 @@ func TestRunExistingResourcesInstances(t *testing.T) {
 		// ------------------------------------------------------------------------------------
 		options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
 			Testing: t,
-			Prefix:  "sm-ins-ext",
 			TarIncludePatterns: []string{
 				"*.tf",
 				fmt.Sprintf("%s/*.tf", solutionsTerraformDir),
@@ -209,7 +208,6 @@ func TestRunExistingResourcesInstances(t *testing.T) {
 
 		options.TerraformVars = []testschematic.TestSchematicTerraformVar{
 			{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
-			{Name: "prefix", Value: options.Prefix, DataType: "string"},
 			{Name: "region", Value: region, DataType: "string"},
 			{Name: "resource_group_name", Value: terraform.Output(t, existingTerraformOptions, "resource_group_name"), DataType: "string"},
 			{Name: "use_existing_resource_group", Value: true, DataType: "bool"},
@@ -237,5 +235,54 @@ func TestRunExistingResourcesInstances(t *testing.T) {
 		terraform.Destroy(t, existingTerraformOptions)
 		terraform.WorkspaceDelete(t, existingTerraformOptions, prefix)
 		logger.Log(t, "END: Destroy (existing resources)")
+	}
+}
+
+func TestRunSecretsManagerSolutionUpgradeSchematic(t *testing.T) {
+	t.Parallel()
+
+	acme_letsencrypt_private_key := GetSecretsManagerKey( // pragma: allowlist secret
+		permanentResources["acme_letsencrypt_private_key_sm_id"].(string),
+		permanentResources["acme_letsencrypt_private_key_sm_region"].(string),
+		permanentResources["acme_letsencrypt_private_key_secret_id"].(string),
+	)
+
+	// Set up a schematics test
+	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
+		Testing: t,
+		TarIncludePatterns: []string{
+			"*.tf",
+			fmt.Sprintf("%s/*.tf", solutionsTerraformDir),
+			fmt.Sprintf("%s/*.tf", fscloudExampleTerraformDir),
+			fmt.Sprintf("%s/*.tf", "modules/secrets"),
+			fmt.Sprintf("%s/*.tf", "modules/fscloud"),
+		},
+		TemplateFolder:         solutionsTerraformDir,
+		ResourceGroup:          resourceGroup,
+		Prefix:                 "sm-da",
+		Tags:                   []string{"test-schematic"},
+		DeleteWorkspaceOnFail:  false,
+		WaitJobCompleteMinutes: 60,
+	})
+
+	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
+		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
+		{Name: "prefix", Value: options.Prefix, DataType: "string"},
+		{Name: "region", Value: validRegions[rand.Intn(len(validRegions))], DataType: "string"},
+		{Name: "resource_group_name", Value: options.Prefix, DataType: "string"},
+		{Name: "service_plan", Value: "trial", DataType: "string"},
+		{Name: "existing_kms_instance_crn", Value: permanentResources["hpcs_south_crn"], DataType: "string"},
+		{Name: "iam_engine_enabled", Value: true, DataType: "bool"},
+		{Name: "public_engine_enabled", Value: true, DataType: "bool"},
+		{Name: "private_engine_enabled", Value: true, DataType: "bool"},
+		{Name: "cis_id", Value: permanentResources["cisInstanceId"], DataType: "string"},
+		{Name: "ca_name", Value: permanentResources["certificateAuthorityName"], DataType: "string"},
+		{Name: "dns_provider_name", Value: permanentResources["dnsProviderName"], DataType: "string"},
+		{Name: "acme_letsencrypt_private_key", Value: *acme_letsencrypt_private_key, DataType: "string"},
+	}
+
+	err := options.RunSchematicUpgradeTest()
+	if !options.UpgradeTestSkipped {
+		assert.Nil(t, err, "This should not have errored")
 	}
 }

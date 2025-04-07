@@ -13,7 +13,7 @@ variable "prefix" {
 variable "region" {
   type        = string
   description = "Region where resources will be created"
-  default     = "us-south"
+  default     = "au-syd"
 }
 
 variable "resource_group" {
@@ -31,11 +31,6 @@ variable "resource_tags" {
 ##############################################################################
 # Key Management Service (KMS)
 ##############################################################################
-
-variable "existing_kms_instance_guid" {
-  type        = string
-  description = "The GUID of the Hyper Protect Crypto Services instance in which the key specified in `kms_key_crn` is coming from."
-}
 
 variable "kms_key_crn" {
   type        = string

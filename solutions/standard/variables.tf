@@ -40,6 +40,7 @@ variable "region" {
 variable "prefix" {
   type        = string
   description = "The prefix to add to all resources created by this solution. To not use any prefix value, you can set this value to `null` or an empty string."
+  default     = "dev"
 }
 
 ########################################################################################################################
@@ -153,15 +154,21 @@ variable "private_cert_engine_config_template_name" {
 # IAM engine config
 ########################################################################################################################
 
+variable "skip_iam_authorization_policy" {
+  type        = bool
+  description = "Whether to skip the creation of the IAM authorization policies required to enable the IAM credentials engine. If set to false, policies will be created that grants the Secrets Manager instance 'Operator' access to the IAM identity service, and 'Groups Service Member Manage' access to the IAM groups service."
+  default     = false
+}
+
 variable "iam_engine_enabled" {
   type        = bool
-  description = "Set this to true to to configure a Secrets Manager IAM credentials engine. If set to false, no IAM engine will be configured for your instance."
+  description = "(LEGACY - recommend to use `skip_iam_authorization_policy` instead). Set this to true to to configure a Secrets Manager IAM credentials engine. If set to false, no IAM engine will be configured for your instance."
   default     = false
 }
 
 variable "iam_engine_name" {
   type        = string
-  description = "The name of the IAM engine used to configure a Secrets Manager IAM credentials engine. If the prefix input variable is passed it is attached before the value in the format of '<prefix>-value'."
+  description = "(LEGACY - recommend to use `skip_iam_authorization_policy` instead). The name of the IAM engine used to configure a Secrets Manager IAM credentials engine. If the prefix input variable is passed it is attached before the value in the format of '<prefix>-value'."
   default     = "iam-engine"
 }
 
@@ -227,7 +234,7 @@ variable "ibmcloud_kms_api_key" {
 variable "enable_event_notifications" {
   type        = bool
   default     = false
-  description = "Set this to true to enable lifecycle notifications for your Secrets Manager instance by connecting an Event Notifications service. When setting this to true, a value must be passed for `existing_event_notifications_instance_crn`"
+  description = "Set this to true to enable lifecycle notifications for your Secrets Manager instance by connecting an Event Notifications service. When setting this to true, a value must be passed for `existing_event_notification_instance_crn`"
 }
 
 variable "existing_event_notifications_instance_crn" {
