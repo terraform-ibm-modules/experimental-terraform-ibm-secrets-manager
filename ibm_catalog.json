@@ -298,7 +298,6 @@
             }
           ],
           "architecture": {
-            "descriptions": "This architecture supports creating and configuring a Secrets Manager instance.",
             "features": [
               {
                 "title": "Creates a Secrets Manager instance.",
